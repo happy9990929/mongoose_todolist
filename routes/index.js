@@ -15,6 +15,10 @@ const routes = async (req, res) => {
     req.on('end', () => PostControllers.createPosts({ body, req, res }));
   } else if (url.startsWith('/posts/') && method == 'DELETE') {
     PostControllers.deletePost({ req, res });
+  } else if (url.startsWith('/posts') && method == 'DELETE') {
+    PostControllers.deletePosts({ req, res });
+  } else if (url.startsWith('/posts/') && method == 'PATCH') {
+    req.on('end', () => PostControllers.editPost({ body, req, res }));
   } else if (method == 'OPTIONS') {
     HttpControllers.cors(req, res);
   } else {
